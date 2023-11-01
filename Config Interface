@@ -1,0 +1,19 @@
+# import module 
+import cisco
+from cisco.vlan import Vlan
+from cisco.interface import Interface
+from cli import cli
+
+# create VLAN 150
+vlan = Vlan() 
+vlan.create_vlan(150)
+print(vlan.get_vlans()) 
+
+# config ethernet1/6
+cli("configure terminal;interface Ethernet1/6;no switchport")
+
+# config interface
+intf16 = Interface('Ethernet1/6')
+intf16.set_description('Interface-Python')
+intf16.set_ipaddress(ip_address="192.168.1.1/24")
+intf16.set_state(state="no shut")
