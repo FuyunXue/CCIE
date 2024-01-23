@@ -1,0 +1,99 @@
+# -*- coding:utf-8  -*-
+# Author:Ben Xue
+# 交换技术非常繁杂，统计好这些类别，并查看内部详情
+
+
+motd = '''
+#####################################################################
+   请根据对应的号码选择一个交换技术查看详情:                      
+#####################################################################                                                                   
+   1.端口类型（access,trunk,hybrid(华为独有)）
+   2.端口安全（端口MAC安全,端口隔离,阻止端口泛洪）
+   3.VLAN技术（VLAN,trunk）
+   4.VLAN安全（Vacl,PVLAN）
+   5.链路聚合(二层聚合,三层聚合,静态,LACP,PAgP)
+   6.虚拟化堆叠
+   7.STP（PVST,RSTP,MSTP,边缘节点快速转发）
+   8.STP安全（root保护，BPDU保护）
+   9.冗余协议（VRRP,HSRP,GLBP）
+   10.DHCP
+   11.DHCPsnooping
+   12.ARP（2.5层）
+   13.ARP防护
+   14.IP源防护
+   15.交换机三层技术(SVI,单臂路由,IPv6,VxLAN)
+   16.ACL
+   17.NAT，PAT
+   18.QoS
+   19.交换机安全（MAC攻击,VLAN攻击,欺骗攻击,攻击交换机）
+   20.AAA认证
+   21.组播（PIM-DM,PIM-SM）
+   22.其他杂项（NTP,802.1x）
+#####################################################################
+'''
+print(motd)
+
+dict1 = {
+    '1': '端口分为:access,trunk(华为专有hydrid)\n',
+    '2': '端口MAC安全：MAC地址绑定，限定单一接口MAC地址数量，粘性MAC地址\n'
+         '端口隔离Isolate：隔离组中实现二层数据隔离（待补充）\n'
+         '阻止端口泛洪（未知单播和广播）：一般配合端口MAC安全使用，因为交换机固定绑定MAC，不会出现未知单播。\n',
+    '3': 'VLAN：分割广播域，增加广播域数量，native vlan主要用于传输二层技术帧（802.3帧），相关技术还有VTP\n'
+         'trunk:允许多个VLAN在一条通道内数据通行。相关技术还有DTP（动态trunk协议）来协商两端模式\n',
+    '4': 'VLAN安全中包含：Vacl，PVLAN\n'
+         'Vacl:基于vlan的acl，\n'
+         'PVLAN:\n',
+    '5': '链路聚合分为:二层聚合，三层聚合；按照方式分为静态聚合和动态聚合，动态聚合中包括：LACP,PAgP\n'
+         '二层聚合:\n'
+         '三层聚合:\n'
+         'LACP:\n'
+         'PAgP:\n',
+    '6': '虚拟化堆叠技术:近距离堆叠，远距离堆叠（华为特有，但受制于带宽，用处不大）\n'
+         '堆叠主要思路为:将两个或以上设备通过特殊线缆链接一起，逻辑上形成一台机器，并且两个设备的管理形成逻辑上主备主控板\n',
+    '7': 'STP分为:PVST,RSTP,MSTP，快速转发技术有边缘端口快速转发\n'
+         'PVST:\n'
+         'RSTP:\n'
+         'MSTP:\n'
+         'portfast\n',
+    '8': 'STP安全分为:root保护,BPDU保护\n'
+         'root保护:\n'
+         'BPDU保护:\n',
+    '9': '下一跳冗余协议分为:VRRP,HSRP,GLBP\n'
+         'VRRP:※\n'
+         'HSRP:功能上和VRRP相同，甚至不能主动设置单点IP为虚拟网关，用它不如用VRRP\n'
+         'GLBP:※\n',
+    '10': 'DHCP\n',
+    '11': 'DHCPsnooping\n',
+    '12': 'ARP协议:ARP,RARP,代理ARP,免费ARP\n',
+    '13': 'ARP防护:\n',
+    '14': 'IP源防护:\n',
+    '15': '交换机三层技术分为：SVI和单臂路由,IPv6,VxLAN\n'
+          '\n'
+          '\n'
+          'SVI(VLANIF)技术为:将vlan配置IP地址,作为管理VLAN或终端的默认网关,用于实现二层数据跨vlan转发\n',
+    '16': 'ACL分为Racl，Pacl，Vacl\n'
+          'Racl:基于路由器的acl，基础的acl\n'
+          'Pacl:基于端口的acl，可以应用到二层上。\n'
+          'Vacl:在VLAN安全部分中已经提到。\n',
+    '17': 'NAT技术一般和ACL一起使用，也属于IPv4独有技术，分为：NAT,PAT\n'
+          '\n'
+          '\n',
+    '18': 'QoS\n',
+    '19': '交换机安全:MAC攻击，VLAN攻击，欺骗攻击，攻击交换机\n',
+    '20': 'AAA系统，全名认证-授权-计费网络安全系统\n'
+          '认证：\n'
+          '授权：\n'
+          '计费：\n',
+    '21': '组播:PIM-DM,PIM-SM\n',
+    '22': '其余杂项:NTP(网络时间协议),802.1x(一般和AAA一起使用)\n',
+}
+
+temp = 'ok'
+while temp != 'end':
+    num1 = input('请输出序号查看详情(1-22):')
+    if num1.isdigit() and 0 < int(num1) < 23:
+        print(dict1[num1])
+
+    else:
+        print('输入代码无效，请输入正确数字或end以结束')
+        temp = input()
